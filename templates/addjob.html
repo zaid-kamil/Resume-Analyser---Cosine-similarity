@@ -1,0 +1,59 @@
+{% extends 'layout/base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/styles.css">
+<style>
+  body {
+    background-color: #a5c9ee;
+    background-image: url('https://michalsnik.github.io/aos/img/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+</style>
+{% endblock %}
+
+
+
+{% block content %}
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-5 mx-auto">
+      <div class="card" data-aos="flip-left" data-aos-duration="2000">
+        <div class="card-body">
+          <h1>Add Job</h1>
+          <form  method="post">
+            <div class="mb-3"> 
+              <label for="jobTitle">Job Title:</label>
+              <input type="text" id="jobTitle" name="jobTitle" placeholder="Application developer" required class="form-control form-control-lg">
+            </div>
+            <div class="mb-3"> 
+              <label for="jobDescription">Job Description:</label>
+              <textarea id="jobDescription" name="jobDescription" rows="4" cols="50" required class="form-control form-control-lg" placeholder="Add job description..."></textarea>
+            </div>
+            <div class="mb-3"> 
+              <label for="jobLocation">Job Location:</label>
+              <input type="text" id="jobLocation" name="jobLocation" required class="form-control form-control-lg" placeholder="Lucknow">
+            </div>
+            <div class="mb-3"> 
+              selec
+              <label for="jobType">Job Type:</label>
+              <select id="jobType" name="jobType" required class="form-select form-select-lg">
+                <option value="Full Time">Full Time</option>
+                <option value="Part Time">Part Time</option>
+                <option value="Contract">Contract</option>
+              </select>
+            </div>
+            <div class="mb-3 d-flex"> 
+              <button class="btn btn-lg btn-outline-info"> 
+                Add Job
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

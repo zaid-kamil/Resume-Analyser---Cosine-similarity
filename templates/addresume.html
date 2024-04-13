@@ -1,0 +1,76 @@
+{% extends 'layout/base.html' %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/styles.css">
+{% endblock %}
+
+
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col">
+            <h1>Add Resume</h1>
+        </div>
+    </div>
+</div>
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body pdfcard">
+                    <form method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="formtype" value="pdf">
+                        <div class="mb-3 input-group">
+                            <input type="file" class="form-control" name="pdffile" id="pdffile" placeholder="pdffile"
+                                aria-describedby="pdffileHelpId" />
+                            <button type="submit" class="btn btn-primary">
+                                Upload
+                            </button>
+                        </div>
+                        <div id="pdffileHelpId" class="form-text">Only upload a valid pdf file</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- display saved data -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>filename</th>
+                                <th>created</th>
+                                <th>action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if resumes %}
+                            {% for resume in resumes %}
+                            <tr>
+                                <td>{{ resume.id }}</td>
+                                <td>
+                                    <a href="/{{ resume.path }}" target="_blank">{{resume.path}}</a>
+                                </td>
+                                <td>{{ resume.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                                <td>
+                                    <a href="/resume/view/{{ resume.id }}" class="btn btn-primary">View</a>
+                                    <a href="/resume/delete/{{ resume.id }}" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="4">No data found</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

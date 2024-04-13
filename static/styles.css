@@ -1,0 +1,25 @@
+body{
+    background-color: #dfdcdc;
+}
+
+.pdfcard{
+    background-color: aquamarine;
+    height: 20rem;
+}
+.doccard{
+    background-color: rgb(127, 150, 255);
+    height: 20rem;
+}
+.Addjob{
+    background-color: rgb(0, 0, 0);
+    height: 20rem;
+}
+.jobdiscription{
+    background-color: rgb(41, 57, 130);
+    height: 20rem;
+}
+.jobtitle{
+    background-color: rgb(85, 194, 194);
+    height: 20rem;
+}
+

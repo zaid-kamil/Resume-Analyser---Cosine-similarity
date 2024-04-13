@@ -1,0 +1,102 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <h1>Job Details</h1>
+            <div class="card shadow-lg p-5">
+                <div class="card-body">
+                    <h2 class="card-title ">
+                        {{ job.job_title }}
+                    </h2>
+                    <p class="card-text">Job type:
+                        <span class="fw-bold">
+                            {{ job.job_type }}
+                        </span>
+                    </p>
+                    <p class="card-text lead">Location: <span class="fw-bold">{{ job.job_location }}</span></p>
+                    <p class="card-text">
+                        {{ job.job_description|truncate(400) }}
+                        <a class="text-decoration-none" href="/job/view/{{ job.id }}">Read more</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row my-5" data-aos="fade-up" data-aos-delay="50">
+        <div class="col-md-8 mx-auto">
+            <h2>Matched Resumes</h2>
+            <div class="card shadow-lg p-1">
+                <div class="card-body">
+                    <div class="row">
+                        {% for r in results %}
+                        <div class="col-12 mb-3">
+                            <div class="card p-5 border-0">
+                                <div class="card-body">
+                                    <h5 class="card-title lead mb-3">
+
+                                        Resume from
+                                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        <a class="text-decoration-none" href="mailto:{{ r.email }}">{{ r.email }}</a>
+                                    </h5>
+                                    
+                                    <span class="badge bg-danger rounded-pill" data-aos="fade-right" data-aos-delay="500">Extracted Keywords</span>
+
+                                    {% for word in r.keywords %}
+                                    <span class="badge rounded-pill text-bg-primary" data-aos="fade-up"
+                                        data-aos-delay="500">
+                                        {{word}}
+                                    </span>
+                                    {% endfor %}
+                                    <!-- date -->
+                                    <p class="card-text my-3" data-aos="fade-up" data-aos-delay="500">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                        Submitted: {{ r.resume.created_at.strftime('%Y-%m-%d %H:%M:%S') }}
+                                    </p>
+                                    {% if r.score > 70 %}
+                                    <div class="progress progress-bar-striped my-3" role="progressbar"
+                                        aria-label="Example with label" aria-valuenow="{{r.score}}" aria-valuemin="0"
+                                        aria-valuemax="100" data-aos="fade-up" data-aos-delay="700">
+                                        <div class="progress-bar progress-bar-striped bg-success progress-bar-animated"
+                                            style="width: {{r.score}}%">
+                                            {{r.score }} %
+                                        </div>
+                                    </div>
+                                    {% elif r.score > 30 %}
+                                    <div class="progress progress-bar-striped my-3" role="progressbar"
+                                    aria-label="Example with label" aria-valuenow="{{r.score}}" aria-valuemin="0"
+                                    aria-valuemax="100" data-aos="fade-up" data-aos-delay="700">
+                                    <div class="progress-bar progress-bar-striped bg-info progress-bar-animated"
+                                        style="width: {{r.score}}%">
+                                        {{r.score }} %
+                                    </div>
+                                </div>
+                                    {% else %}
+                                    <div class="progress progress-bar-striped my-3" role="progressbar"
+                                        aria-label="Example with label" aria-valuenow="{{r.score}}" aria-valuemin="0"
+                                        aria-valuemax="100" data-aos="fade-up" data-aos-delay="700">
+                                        <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated"
+                                            style="width: {{r.score}}%">
+                                            {{r.score }} %
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+
+
+                                    <a href="/resume/view/{{ r.resume.id }}" class="btn btn-sm btn-primary" data-aos="fade-up" data-aos-delay="700">View Resume</a>
+                                    <a href="/resume/delete/{{ r.resume.id }}" class="btn btn-sm btn-danger" data-aos="fade-up" data-aos-delay="700">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

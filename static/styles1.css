@@ -1,0 +1,76 @@
+nav{
+    padding: 2vw 2vw;
+    width: 100%;
+    background-color: rgb(10, 7, 3);
+    display: flex;
+    align-items: center;
+    
+    justify-content: space-between;
+    }
+    
+    #logo{
+       width: 100%;
+       padding: 0, 5vw;
+    }
+    
+    #logo h1{
+        color: blanchedalmond;
+        font-size: 50px;
+        position: relative;
+        z-index: 10;
+    }
+    
+    #shape {
+        height: 6vw;
+        width: 6vw;
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(to top right,black,rgb(138, 134, 134));
+        left:13%;
+        top: 2%;
+        
+    }
+    
+    #nav-part2{
+        display: flex;
+        align-items: center;
+        gap: 1vw;
+    }
+    #nav-part2 h4{
+        padding: 10px 20px;
+        border: 1px solid #deb157;
+        border-radius: 50px;
+        font-weight: 500;
+        color: rgb(234, 237, 239);
+        position: relative;
+        transition: all ease 0.4s;
+        font-size: 18px;
+        overflow: hidden;
+    }
+    #nav-part2 h4::after{
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-color: #deb157;
+        left: 0;
+        bottom: -100%;
+        border-radius: 50%;
+        transition: all ease 0.4s;
+    }
+    #nav-part2 h4:hover::after{
+        bottom: 0;
+        border-radius: 0;
+    
+    }
+    
+    #nav-part2 h4 a{
+        text-decoration: none;
+        color: #f9f9f7;
+        position: relative;
+        z-index: 9;
+    }
+    #nav-part2 h4:hover a{
+         color: #0a0a0a;
+    }
+    

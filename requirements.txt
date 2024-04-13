@@ -1,0 +1,9 @@
+flask-sqlalchemy
+flask-migrate
+python-dotenv
+flask-login
+pdfminer.six
+scikit-learn
+docx2txt
+nltk
+flask

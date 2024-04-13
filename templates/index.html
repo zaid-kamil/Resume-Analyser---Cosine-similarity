@@ -1,0 +1,129 @@
+{% extends 'layout/base.html' %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+
+{% if session.isadmin %}
+<!-- create a row of all jobs -->
+<div class="container my-5">
+    <div class="row">
+        <div class="col">
+            <h1>All Resumes</h1>
+        </div>
+    </div>
+    <div class="row">
+        {% for resume in resumes %}
+        <div class="col-lg-4 mb-3">
+            <div class="card shadow-lg p-5">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Resume #{{ resume.id }}
+                    </h5>
+                    <p class="card-text">{{ resume.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                    <a href="/resume/view/{{ resume.id }}" class="btn btn-lg btn-primary">View</a>
+                    <a href="/resume/delete/{{ resume.id }}" class="btn btn-lg btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <hr class="my-5">
+</div>
+<div class="container pt-2">
+    <div class="row">
+        <div class="col">
+            <h1>Job listings</h1>
+        </div>
+    </div>
+    <div class="row">
+        {% for job in jobs %}
+        <div class="col-lg-6 mb-3">
+            <div class="card shadow-lg p-5">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        {{ job.job_title }}
+                    </h2>
+                    <p class="card-text">{{ job.job_type }}</p>
+                    <p class="card-text lead">{{ job.job_location }}</p>
+                    <!-- make button in a row -->
+                    <div class="d-flex justify-content-start">
+                        <a href="/job/match/{{job.id}}" class="btn btn-lg btn-success me-2">Match Resumes</a>
+                        <a href="/job/view/{{ job.id }}" class="btn btn-lg btn-primary me-2">View</a>
+                        <a href="/job/delete/{{ job.id }}" class="btn btn-lg btn-danger me-2">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="col">
+            <div class="card shadow-lg p-5 bg-secondary text-light">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        Add Job
+                    </h2>
+                    <p class="card-text">Add a new job listing</p>
+                    <p>Analyse using AI</p>
+                    <a href="/job/add" class="btn btn-lg btn-primary">
+                        <i class="fas fa-plus"></i> Click to Add
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- create a row of all resume uploads -->
+{% else %}
+<!-- create a row of all resume uploads by user-->
+<div class="container my-5">
+    <div class="row">
+        <div class="col">
+            <h1>My Resumes</h1>
+        </div>
+    </div>
+</div>
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>filename</th>
+                        <th>created</th>
+                        <th>action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if resumes %}
+                    {% for resume in resumes %}
+                    <tr>
+                        <td>{{ resume.id }}</td>
+                        <td>
+                            <!-- link view pdf -->
+                            <a href="/{{ resume.path }}" target="_blank">{{resume.path}}</a>
+                        </td>
+                        <td>{{ resume.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        <td>
+                            <a href="/resume/view/{{ resume.id }}" class="btn btn-primary">View</a>
+                            <a href="/resume/delete/{{ resume.id }}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="4">No data found</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endif %}
+
+{% endblock %}

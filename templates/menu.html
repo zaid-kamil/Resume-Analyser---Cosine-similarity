@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/static/styles1.css">
+<nav>
+    <img src="" alt="">
+    <div id="logo">
+        <h1>Resume Analyser</h1>
+    </div>
+    <div id="shape">
+    </div>
+    <div id="nav-part2">
+        <h4><a href="/">Home</a></h4>
+
+        {% if session.isauth %}
+        <h4 style="background-color: rgb(0, 55, 255);"><a href="#" >{{session.username}}</a></h4>
+        <h4><a href="/logout">logout</a></h4>
+        {% else %}
+        <h4><a href="/login">login</a></h4>
+        <h4><a href="/register">register</a></h4>
+        {% endif %}
+
+        {% if session.isadmin %}
+        <h4><a href="/job/add">addjob</a></h4>
+        {% endif %}
+        <h4><a href="/resume/add">addresume</a></h4>
+    </div>
+</nav>

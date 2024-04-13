@@ -1,0 +1,21 @@
+{% block css %}
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+{% endblock %}
+{% block js %}
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+{% if messages %}
+<script>
+    {% for message in messages %}
+    Toastify({
+        text: "{{ message }}",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+    }).showToast();
+    {% endfor %}
+</script>
+{% endif %}
+{% endblock %}
